@@ -3,26 +3,26 @@ const { Telegraf, session } = require('telegraf')
 const express = require('express')
 require('dotenv').config()
 
-// const morgan = require("morgan");
-// app.use(morgan("tiny"));
-app.use(methodOverride("_method")); //put Delete
-app.use(express.urlencoded({ extended: false }));
-
-
-const botToken = process.env.BOT_TOKEN
-
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3600;
 }
 console.log("port:",port)
 
+const app = express()
+// const morgan = require("morgan");
+// app.use(morgan("tiny"));
+app.use(methodOverride("_method")); //put Delete
+app.use(express.urlencoded({ extended: false }));
+
+//BOT
+const botToken = process.env.BOT_TOKEN
+
 const DOMAIN = `https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`
 
 const bot = new Telegraf(botToken)
 
 // bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
-
 bot.start((ctx) => ctx.reply('Welcome'))
 bot.help((ctx) => ctx.reply('Send me a sticker,yooloo'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
@@ -49,14 +49,12 @@ bot.telegram.setWebhook(`${DOMAIN}`).then(() => {
 //      bot.webhookCallback(`/${botToken}`))
 //   .listen(8443)
 
+/////////////////////////////////////////////////////////////////////////
 
 
-const app = express()
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
-
 app.use(bot.webhookCallback(`/${botToken}`))
-
 app.post(`/${botToken}`, (req, res) => {
   console.log("req.body",req.body)
   // res.send("Ok");
@@ -67,9 +65,5 @@ app.post(`/${botToken}`, (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 })
-
 // app.use(bot.webhookCallback('/secret-path'))
-
-
-
 // app.listen(port)
