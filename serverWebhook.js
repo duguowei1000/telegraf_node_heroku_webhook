@@ -20,8 +20,9 @@ app.use(express.json())
 
 //BOT
 const botToken = process.env.BOT_TOKEN
+const botSecret = process.env.BOT_SECRET
 
-const DOMAIN = `https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`
+const DOMAIN = `https://telegraf-node-heroku-webhook.herokuapp.com/${botSecret}`
 
 const bot = new Telegraf(botToken)
 
@@ -57,7 +58,7 @@ bot.telegram.setWebhook(`${DOMAIN}`).then(() => {
 
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
-app.use(bot.webhookCallback(`/${botToken}`))
+app.use(bot.webhookCallback(`/${botSecret}`))
 app.post(`/`, (req, res) => {
   // console.log("req.body",req.body)
   // res.send("Ok");
@@ -66,7 +67,7 @@ app.post(`/`, (req, res) => {
 })
 
 //async await
-app.post(`/${botToken}`, (req, res) => {
+app.post(`/${botSecret}`, (req, res) => {
   console.log("req.body__",req.body)
   try {
     res.status(200).json(req.body);
