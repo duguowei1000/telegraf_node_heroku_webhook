@@ -4,7 +4,11 @@ const express = require('express')
 require('dotenv').config()
 
 const botToken = process.env.BOT_TOKEN
-const port = process.env.PORT
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3500;
+}
 
 const bot = new Telegraf(botToken)
 
@@ -48,8 +52,5 @@ app.listen(port, () => {
 // app.use(bot.webhookCallback('/secret-path'))
 
 
-// let port = process.env.PORT;
-// if (port == null || port == "") {
-//   port = 8000;
-// }
+
 // app.listen(port)
