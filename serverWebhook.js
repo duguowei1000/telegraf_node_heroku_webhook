@@ -68,7 +68,7 @@ app.post(`/`, (req, res) => {
 
 //async await
 console.log('botsecret:',botSecret)
-app.post("/AAHKc2q5RQXLZooleik7FB6K_rakARwZWd8", (req, res) => {
+app.post("/AAHK", (req, res) => {
   console.log("req.body__",req.body)
   // try {
     res.status(200).json(req.body);
