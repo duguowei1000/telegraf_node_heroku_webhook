@@ -9,7 +9,9 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3600;
 }
-console.log(port)
+console.log("port:",port)
+
+const DOMAIN = `https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`
 
 const bot = new Telegraf(botToken)
 
@@ -32,7 +34,9 @@ bot.launch()
 
 
 // bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
-bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`);
+bot.telegram.setWebhook(`${DOMAIN}`).then(() => {
+  console.log(`webhook is set on: ${DOMAIN}`)
+})
 bot.startWebhook(`/${botToken}`, null, 443)
 // require('https')
 //   .createServer(//tlsOptions,
