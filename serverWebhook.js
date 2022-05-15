@@ -17,10 +17,17 @@ bot.start((ctx) => ctx.reply('Welcome'))
 bot.help((ctx) => ctx.reply('Send me a sticker,yooloo'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
-bot.launch()
+// bot.launch()
+
+bot.launch({
+  webhook: {
+    domain: 'https://telegraf-node-heroku-webhook.herokuapp.com',
+    port: 5000
+  }
+})
 
 // Http webhook, for nginx/heroku users.
-bot.startWebhook(`/${botToken}`, null, 5000)
+// bot.startWebhook(`/${botToken}`, null, 5000)
 
 const app = express()
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
