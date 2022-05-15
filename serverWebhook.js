@@ -15,6 +15,7 @@ const app = express()
 // app.use(morgan("tiny"));
 app.use(methodOverride("_method")); //put Delete
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 
 //BOT
 const botToken = process.env.BOT_TOKEN
@@ -65,9 +66,9 @@ app.post(`/${botToken}`, (req, res) => {
 
 //async await
 app.post("/", (req, res) => {
-  console.log("req.body",req.body)
+  console.log("req.body__",req.body)
   try {
-    res.status(200).send(req.body);
+    res.status(200).json(req.body);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
