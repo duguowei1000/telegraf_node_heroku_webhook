@@ -52,7 +52,7 @@ app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 app.use(bot.webhookCallback(`/${botToken}`))
 
 app.post(`/${botToken}`, (req, res) => {
-  console.log(req.body)
+  console.log("req.body",req.body)
   return bot.handleUpdate(req.body, res)
 })
 
