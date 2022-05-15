@@ -15,6 +15,7 @@
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16",
-    "telegraf": "^4.8.2"
+    "telegraf": "^4.8.2",
+    "urlcat": "^2.0.4"
   }
 }
