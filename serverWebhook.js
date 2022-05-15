@@ -11,6 +11,10 @@ if (port == null || port == "") {
 }
 console.log("port:",port)
 
+const botToken = process.env.BOT_TOKEN
+
+const bot = new Telegraf(botToken)
+
 const app = express()
 
 app.use(morgan("tiny"));
@@ -32,7 +36,6 @@ app.post(`/`, (req, res) => {
 })
 
 //async await
-console.log('botsecret:',botSecret)
 app.post("/aahk", (req, res) => {
   
   try {
