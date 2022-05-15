@@ -53,7 +53,8 @@ app.use(bot.webhookCallback(`/${botToken}`))
 
 app.post(`/${botToken}`, (req, res) => {
   console.log("req.body",req.body)
-  return bot.handleUpdate(req.body, res)
+  res.json(req.body)
+  // return bot.handleUpdate(req.body, res)
 })
 
 app.listen(port, () => {
