@@ -3,16 +3,23 @@ const { Telegraf, session } = require('telegraf')
 const express = require('express')
 require('dotenv').config()
 
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const botToken = process.env.BOT_TOKEN
+const port = process.env.PORT
+
+const bot = new Telegraf(botToken)
 
 bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
 // bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
-// bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
-bot.telegram.setWebhook('https://pure-refuge-83887.herokuapp.com/');
+bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`);
+
+
+// Http webhook, for nginx/heroku users.
+bot.startWebhook(`/${botToken}`, null, port)
 
 const app = express()
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
+
 
 app.use(bot.webhookCallback('/secret-path'))
 
@@ -23,6 +30,6 @@ app.use(bot.webhookCallback('/secret-path'))
 // }
 // app.listen(port);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${process.env.PORT}!`)
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`)
 })
