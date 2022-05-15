@@ -57,12 +57,12 @@ bot.telegram.setWebhook(`${DOMAIN}`).then(() => {
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
 app.use(bot.webhookCallback(`/${botToken}`))
-app.post(`/${botToken}`, (req, res) => {
-  console.log("req.body",req.body)
-  // res.send("Ok");
-  res.json({ message: `${req.body}` });
-  // return bot.handleUpdate(req.body, res)
-})
+// app.post(`/${botToken}`, (req, res) => {
+//   console.log("req.body",req.body)
+//   // res.send("Ok");
+//   res.json({ message: `${req.body}` });
+//   // return bot.handleUpdate(req.body, res)
+// })
 
 //async await
 app.post(`/${botToken}`, (req, res) => {
