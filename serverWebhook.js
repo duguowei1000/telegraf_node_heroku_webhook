@@ -68,13 +68,14 @@ app.post(`/`, (req, res) => {
 
 //async await
 console.log('botsecret:',botSecret)
-app.post("/AAHK", (req, res) => {
-  console.log("req.body__",req.body)
-  // try {
-    res.status(200).json(req.body);
-  // } catch (error) {
-  //   res.status(400).json({ error: error.message });
-  // }
+app.post("/aahk", (req, res) => {
+  
+  try {
+    res.status(200).json({ message: req.body });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+
 });
 
 app.listen(port, () => {
