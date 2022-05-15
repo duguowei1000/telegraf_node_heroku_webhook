@@ -1,6 +1,7 @@
 // const Telegraf = require('telegraf')
 const { Telegraf, session } = require('telegraf')
 const express = require('express')
+const methodOverride = require("method-override")
 require('dotenv').config()
 
 let port = process.env.PORT;
