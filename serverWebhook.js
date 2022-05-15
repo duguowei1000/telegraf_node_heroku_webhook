@@ -63,6 +63,16 @@ app.post(`/${botToken}`, (req, res) => {
   // return bot.handleUpdate(req.body, res)
 })
 
+//async await
+app.post("/", (req, res) => {
+  console.log("req.body",req.body)
+  try {
+    res.status(200).send(req.body);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 })
