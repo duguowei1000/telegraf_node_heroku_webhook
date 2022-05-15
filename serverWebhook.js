@@ -12,9 +12,17 @@ bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 bot.telegram.setWebhook('https://pure-refuge-83887.herokuapp.com/');
 
 const app = express()
-app.get('/', (req, res) => res.send('Hello World_yesyes!'))
+app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
 app.use(bot.webhookCallback('/secret-path'))
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!')
+
+
+// let port = process.env.PORT;
+// if (port == null || port == "") {
+//   port = 8000;
+// }
+// app.listen(port);
+
+app.listen(process.env.PORT, () => {
+  console.log(`Example app listening on port ${process.env.PORT}!`)
 })
