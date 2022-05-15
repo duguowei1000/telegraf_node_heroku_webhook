@@ -15,13 +15,13 @@ bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${bo
 
 
 // Http webhook, for nginx/heroku users.
-bot.startWebhook(`/${botToken}`, null, port)
+bot.startWebhook(`/${botToken}`, null, 5000)
 
 const app = express()
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
 
-app.use(bot.webhookCallback('/secret-path'))
+// app.use(bot.webhookCallback('/secret-path'))
 
 
 // let port = process.env.PORT;
