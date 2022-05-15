@@ -37,7 +37,7 @@ bot.launch()
 bot.telegram.setWebhook(`${DOMAIN}`).then(() => {
   console.log(`webhook is set on: ${DOMAIN}`)
 })
-bot.startWebhook(`/${botToken}`, null, 443)
+// bot.startWebhook(`/${botToken}`, null, 443)
 // require('https')
 //   .createServer(//tlsOptions,
 //      bot.webhookCallback(`/${botToken}`))
@@ -50,6 +50,12 @@ app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
 
 app.use(bot.webhookCallback(`/${botToken}`))
+
+app.post(`/${botToken}`, (req, res) => {
+  console.log(req.body)
+  return bot.handleUpdate(req.body, res)
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 })
