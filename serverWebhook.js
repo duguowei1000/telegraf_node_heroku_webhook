@@ -7,8 +7,9 @@ const botToken = process.env.BOT_TOKEN
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 3500;
+  port = 3600;
 }
+console.log(port)
 
 const bot = new Telegraf(botToken)
 
