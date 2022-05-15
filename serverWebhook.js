@@ -65,7 +65,7 @@ app.post(`/${botToken}`, (req, res) => {
 })
 
 //async await
-app.post("/", (req, res) => {
+app.post(`/${botToken}`, (req, res) => {
   console.log("req.body__",req.body)
   try {
     res.status(200).json(req.body);
