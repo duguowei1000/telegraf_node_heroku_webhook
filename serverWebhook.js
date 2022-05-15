@@ -11,7 +11,7 @@ const bot = new Telegraf(botToken)
 // bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
 // bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
-bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`);
+// bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`);
 
 bot.start((ctx) => ctx.reply('Welcome'))
 bot.help((ctx) => ctx.reply('Send me a sticker,yooloo'))
@@ -22,7 +22,7 @@ bot.hears('hi', (ctx) => ctx.reply('Hey there'))
 bot.launch({
   webhook: {
     domain: 'https://telegraf-node-heroku-webhook.herokuapp.com',
-    port: 5000
+    port: 8443
   }
 })
 
