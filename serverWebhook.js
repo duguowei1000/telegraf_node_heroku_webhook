@@ -12,7 +12,7 @@ bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 bot.telegram.setWebhook('https://pure-refuge-83887.herokuapp.com/');
 
 const app = express()
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Hello World_yesyes!'))
 
 app.use(bot.webhookCallback('/secret-path'))
 app.listen(3000, () => {
