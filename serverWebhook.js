@@ -58,7 +58,7 @@ bot.telegram.setWebhook(`${DOMAIN}`).then(() => {
 
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
-app.use(bot.webhookCallback(`/AAHK`))
+app.use(bot.webhookCallback(`/aahk`))
 app.post(`/`, (req, res) => {
   // console.log("req.body",req.body)
   // res.send("Ok");
