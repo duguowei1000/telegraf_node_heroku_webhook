@@ -3,6 +3,12 @@ const { Telegraf, session } = require('telegraf')
 const express = require('express')
 require('dotenv').config()
 
+// const morgan = require("morgan");
+// app.use(morgan("tiny"));
+app.use(methodOverride("_method")); //put Delete
+app.use(express.urlencoded({ extended: false }));
+
+
 const botToken = process.env.BOT_TOKEN
 
 let port = process.env.PORT;
