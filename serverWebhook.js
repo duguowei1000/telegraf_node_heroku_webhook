@@ -8,11 +8,16 @@ const port = process.env.PORT
 
 const bot = new Telegraf(botToken)
 
-bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
+// bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
 // bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
 bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`);
 
+bot.start((ctx) => ctx.reply('Welcome'))
+bot.help((ctx) => ctx.reply('Send me a sticker,yooloo'))
+bot.on('sticker', (ctx) => ctx.reply('👍'))
+bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+bot.launch()
 
 // Http webhook, for nginx/heroku users.
 bot.startWebhook(`/${botToken}`, null, 5000)
@@ -29,6 +34,8 @@ app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 //   port = 8000;
 // }
 // app.listen(port);
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
