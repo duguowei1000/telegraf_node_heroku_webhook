@@ -10,28 +10,40 @@ const bot = new Telegraf(botToken)
 
 // bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
-// bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
-// bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`);
-
 bot.start((ctx) => ctx.reply('Welcome'))
 bot.help((ctx) => ctx.reply('Send me a sticker,yooloo'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
-// bot.launch()
+bot.launch()
 
-bot.launch({
-  webhook: {
-    domain: 'https://telegraf-node-heroku-webhook.herokuapp.com',
-    port: 8443
-  }
-})
+// bot.launch({
+//   webhook: {
+//     domain: 'https://telegraf-node-heroku-webhook.herokuapp.com',
+//     port: 8443
+//   }
+// })
 
 // Http webhook, for nginx/heroku users.
-// bot.startWebhook(`/${botToken}`, null, 5000)
+
+
+// bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
+bot.telegram.setWebhook(`https://telegraf-node-heroku-webhook.herokuapp.com/${botToken}`);
+bot.startWebhook(`/${botToken}`, null, 443)
+// require('https')
+//   .createServer(//tlsOptions,
+//      bot.webhookCallback(`/${botToken}`))
+//   .listen(8443)
+
+
 
 const app = express()
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
+
+app.use(bot.webhookCallback(`/${botToken}`))
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`)
+})
 
 // app.use(bot.webhookCallback('/secret-path'))
 
@@ -40,10 +52,4 @@ app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 // if (port == null || port == "") {
 //   port = 8000;
 // }
-// app.listen(port);
-
-
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
-})
+// app.listen(port)
