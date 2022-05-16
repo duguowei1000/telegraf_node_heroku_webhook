@@ -11,9 +11,10 @@ if (port == null || port == "") {
 }
 console.log("port:",port)
 
+//Parameters
 const botToken = process.env.BOT_TOKEN
-
-const bot = new Telegraf(botToken)
+const botSecret = process.env.BOT_SECRET
+const DOMAIN = `https://telegraf-node-heroku-webhook.herokuapp.com/${botSecret}`
 
 const app = express()
 
@@ -22,7 +23,34 @@ app.use(methodOverride("_method")); //put Delete
 app.use(express.urlencoded({ extended: false })); //Parse URL-encoded bodies
 app.use(express.json())
 
+//BOT
+const bot = new Telegraf(botToken)
+// bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
+bot.start((ctx) => ctx.reply('Welcome'))
+bot.help((ctx) => ctx.reply('Send me a sticker,yooloo'))
+bot.on('sticker', (ctx) => ctx.reply('👍'))
+bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+bot.launch()
 
+// bot.launch({
+//   webhook: {
+//     domain: 'https://telegraf-node-heroku-webhook.herokuapp.com',
+//     port: 8443
+//   }
+// })
+
+
+// bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
+bot.telegram.setWebhook(`${DOMAIN}`).then(() => {
+  console.log(`webhook is set on: ${DOMAIN}`)
+})
+// bot.startWebhook(`/${botToken}`, null, 443)
+// require('https')
+//   .createServer(//tlsOptions,
+//      bot.webhookCallback(`/${botToken}`))
+//   .listen(8443)
+
+/////////////////////////////////////////////////////////////////////////
 
 
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
@@ -34,7 +62,7 @@ app.post(`/`, (req, res) => {
 })
 
 //async await
-app.post("/5374559077:AAHKc2q5RQXLZooleik7FB6K_rakARwZWd8", (req, res) => {
+app.post(`/${botSecret}`, (req, res) => {
   
   // try {
     // res.json({ "hi": "bye"  });
@@ -49,7 +77,7 @@ app.post("/5374559077:AAHKc2q5RQXLZooleik7FB6K_rakARwZWd8", (req, res) => {
 
 });
 
-app.use(bot.webhookCallback(`/5374559077:AAHKc2q5RQXLZooleik7FB6K_rakARwZWd8`)) //must be at the end
+app.use(bot.webhookCallback(`/${botSecret}`)) //must be at the end
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 })
