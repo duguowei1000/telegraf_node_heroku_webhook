@@ -64,16 +64,13 @@ app.post(`/`, (req, res) => {
 //async await
 app.post(`/${botSecret}`, (req, res) => {
   
-  // try {
-    // res.json({ "hi": "bye"  });
+   try {
     bot.handleUpdate(req.body, res)
-    // .finally(() => {
-    //   res.send('success')
-    // })
     res.json({ message: req.body });
-  // } catch (error) {
-    // res.status(400).json({ error: error.message });
-  //}
+
+   } catch (error) {
+     res.status(400).json({ error: error.message });
+  }
 
 });
 
@@ -81,5 +78,3 @@ app.use(bot.webhookCallback(`/${botSecret}`)) //must be at the end
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 })
-// app.use(bot.webhookCallback('/secret-path'))
-// app.listen(port)
