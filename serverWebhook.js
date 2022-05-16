@@ -19,7 +19,7 @@ const app = express()
 
 app.use(morgan("tiny"));
 app.use(methodOverride("_method")); //put Delete
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); //Parse URL-encoded bodies
 app.use(express.json())
 
 
@@ -27,25 +27,29 @@ app.use(express.json())
 
 app.get('/', (req, res) => res.send('Hello World_yesyesyo!'))
 
-app.use(bot.webhookCallback(`/aahk`))
+
 app.post(`/`, (req, res) => {
-  // console.log("req.body",req.body)
-  // res.send("Ok");
-  res.json({ message: req.body });
-  // return bot.handleUpdate(req.body, res)
+  res.json(req.body);
+   return bot.handleUpdate(req.body, res)
 })
 
 //async await
-app.post("/aahk", (req, res) => {
+app.post("/5374559077:AAHKc2q5RQXLZooleik7FB6K_rakARwZWd8", (req, res) => {
   
-  try {
-    res.status(200).json({ message: req.body });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+  // try {
+    // res.json({ "hi": "bye"  });
+    bot.handleUpdate(req.body, res)
+    // .finally(() => {
+    //   res.send('success')
+    // })
+    res.json({ message: req.body });
+  // } catch (error) {
+    // res.status(400).json({ error: error.message });
+  //}
 
 });
 
+app.use(bot.webhookCallback(`/5374559077:AAHKc2q5RQXLZooleik7FB6K_rakARwZWd8`)) //must be at the end
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 })
